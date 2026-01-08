@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complete App in One File</title>
+    <style>
+        /* CSS di sini */
+        body { font-family: Arial; }
+        .editor { 
+            width: 100%; 
+            height: 300px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>All-in-One Web App</h1>
+    
+    <!-- HTML Editor -->
+    <textarea id="htmlEditor" class="editor">&lt;h2&gt;Edit HTML&lt;/h2&gt;</textarea>
+    <button onclick="updatePreview()">Preview</button>
+    
+    <!-- Preview -->
+    <div id="preview"></div>
+    
+    <!-- JavaScript di akhir -->
+    <script>
+        function updatePreview() {
+            const html = document.getElementById('htmlEditor').value;
+            document.getElementById('preview').innerHTML = html;
+        }
+        
+        // LocalStorage untuk save data
+        if(localStorage.getItem('savedHTML')) {
+            document.getElementById('htmlEditor').value = localStorage.getItem('savedHTML');
+        }
+        
+        // Auto-save
+        setInterval(() => {
+            localStorage.setItem('savedHTML', 
+                document.getElementById('htmlEditor').value);
+        }, 5000);
+    </script>
+</body>
+</html>  
